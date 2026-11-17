@@ -34,7 +34,7 @@ func startRepl(cfg *config) {
 			args = words[1:]
 		}
 
-		command, exists := cfg.commands[commandName]
+		command, exists := getCommands()[commandName]
 		if exists {
 			err := command.callback(cfg, args...)
 			if err != nil {
@@ -96,6 +96,11 @@ func getCommands() map[string]cliCommand {
 			name:        "inspect",
 			description: "Inspect a caught pokemon",
 			callback:    commandInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "prints a list of all the names",
+			callback:    commandPokedex,
 		},
 	}
 }

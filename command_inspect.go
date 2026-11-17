@@ -1,8 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func commandInspect(cfg *config, args ...string) error {
+	if len(args) != 1 {
+		return errors.New("you must provide a pokemon name")
+	}
 	pokemonName := args[0]
 	pokemon, ok := cfg.pokeDex[pokemonName]
 	if !ok {
